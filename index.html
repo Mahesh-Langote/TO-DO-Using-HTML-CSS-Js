@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ToDo App</title>
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #f44336;
+      --background-color: #f7f7f7;
+      --font-color: #333;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 94%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid var(--primary-color);
+      border-radius: 3px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      transition: transform 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      word-wrap: break-word;
+      width: 96%;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    .remove-btn {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 8px;
+      border: 2px solid black;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .remove-btn:hover {
+      background-color: #d32f2f;
+    }
+
+    .task-details {
+      font-size: 12px;
+      color: #888;
+      width: 90px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .task-text {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 60px; /* Set the max height to limit vertical scrolling */
+    }
+
+    li:hover {
+      background-color: #f5f5f5;
+      transform: translateX(10px);
+    }
+    /* Footer style */
+    #footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ToDo List</h1>
+    <input type="text" id="taskInput" placeholder="Enter your task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+  </div>
+  <div id="footer">
+    Created by Mahesh Langote &lt;mahelangote777@gmail.com&gt;
+  </div>
+  <script>
+    // Function to add a new task to the list
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+
+      if (taskInput.value.trim() === '') {
+        alert('Please enter a valid task.');
+        return;
+      }
+
+      const newTask = document.createElement('li');
+      const date = new Date();
+      const dateString = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      
+      newTask.innerHTML = `
+        <span class="task-details">${dateString}</span>
+        <span class="task-text">${taskInput.value}</span>
+        <button class="remove-btn" onclick="removeTask(this)">X</button>
+      `;
+      taskList.appendChild(newTask);
+      taskInput.value = '';
+    }
+
+    // Function to remove a task from the list
+    function removeTask(taskElement) {
+      const taskList = document.getElementById('taskList');
+      taskList.removeChild(taskElement.parentNode);
+    }
+  </script>
+</body>
+</html>
