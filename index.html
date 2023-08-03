@@ -33,7 +33,7 @@
     }
 
     input[type="text"] {
-      width: 96%;
+      width: 94%;
       padding: 10px;
       margin-bottom: 15px;
       border: 1px solid var(--primary-color);
@@ -125,7 +125,7 @@
     }
 
     /* Media Query for Mobile Devices */
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       .container {
         max-width: 90%;
         margin: 30px auto;
@@ -179,7 +179,37 @@
     <ul id="taskList"></ul>
   </div>
   <div id="footer">
-    Created by Mahesh Langote @ mahelangote777@gmail.com;
+    Created by Mahesh Langote &lt;mahelangote777@gmail.com&gt;
   </div>
+  <script>
+    // Function to add a new task to the list
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+
+      if (taskInput.value.trim() === '') {
+        alert('Please enter a valid task.');
+        return;
+      }
+
+      const newTask = document.createElement('li');
+      const date = new Date();
+      const dateString = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      
+      newTask.innerHTML = `
+        <span class="task-details">${dateString}</span>
+        <span class="task-text">${taskInput.value}</span>
+        <button class="remove-btn" onclick="removeTask(this)">X</button>
+      `;
+      taskList.appendChild(newTask);
+      taskInput.value = '';
+    }
+
+    // Function to remove a task from the list
+    function removeTask(taskElement) {
+      const taskList = document.getElementById('taskList');
+      taskList.removeChild(taskElement.parentNode);
+    }
+  </script>
 </body>
 </html>
